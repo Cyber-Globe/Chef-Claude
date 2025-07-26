@@ -6,9 +6,10 @@ function Chef() {
   function submitted(event) {
     event.preventDefault();
     console.log("Form submitted!");
-    const formData = new FormData(event.target);
-    const ingredient = formData.get("ingredient");
-    console.log("Ingredient added: ", ingredient);
+    const formData = new FormData(event.currentTarget);
+    const newIngredient = formData.get("ingredient");
+    ingredientElement.push(newIngredient);
+    console.log(ingredientElement);
   }
   return (
     <main className="main">
