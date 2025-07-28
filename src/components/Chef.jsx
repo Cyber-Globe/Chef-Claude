@@ -1,29 +1,36 @@
-function Chef() {
-  const ingredients = ["Chicken", "Oregano", "Tomatoes"];
-  const ingredientElement = ingredients.map((ingredient) => {
-    return <li key={ingredient}>{ingredient}</li>;
-  });
-  function submitted(event) {
+import React from "react";
+export default function Chef() {
+  /**
+   * Challenge: Update our app so that when the user enters a
+   * new ingredient and submits the form, it adds that new
+   * ingredient to our list!
+   */
+
+  const [ingredients, setIngredients] = React.useState(["Chicken", "Oregano"]);
+
+  const ingredientsListItems = ingredients.map((ingredient) => (
+    <li key={ingredient}>{ingredient}</li>
+  ));
+
+  function handleSubmit(event) {
     event.preventDefault();
-    console.log("Form submitted!");
     const formData = new FormData(event.currentTarget);
     const newIngredient = formData.get("ingredient");
-    ingredientElement.push(newIngredient);
-    console.log(ingredientElement);
+    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
+
   return (
-    <main className="main">
-      <form action="" className="add-ingredient-form" onSubmit={submitted}>
+    <main>
+      <form onSubmit={handleSubmit} className="add-ingredient-form">
         <input
           type="text"
-          aria-label="add ingredient"
           placeholder="e.g. oregano"
+          aria-label="Add ingredient"
           name="ingredient"
         />
-        <button>Add Ingredient</button>
+        <button>Add ingredient</button>
       </form>
-      <ul>{ingredientElement}</ul>
+      <ul>{ingredientsListItems}</ul>
     </main>
   );
 }
-export default Chef;
