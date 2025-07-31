@@ -6,22 +6,21 @@ export default function Chef() {
    * ingredient to our list!
    */
 
-  const [ingredients, setIngredients] = React.useState(["Chicken", "Oregano"]);
+  const [ingredients, setIngredients] = React.useState([]);
 
   const ingredientsListItems = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  function addIngredients(formData) {
     const newIngredient = formData.get("ingredient");
+    console.log(newIngredient);
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
 
   return (
     <main>
-      <form onSubmit={handleSubmit} className="add-ingredient-form">
+      <form action={addIngredients} className="add-ingredient-form">
         <input
           type="text"
           placeholder="e.g. oregano"
